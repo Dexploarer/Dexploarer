@@ -1,14 +1,14 @@
 <!-- WALLET-LINKING-BEGIN
 {
-  "lastUpdated": "2025-06-05T06:03:55.269Z",
+  "lastUpdated": "2025-06-22T06:43:24.250Z",
   "wallets": [
     {
       "chain": "ethereum",
-      "address": "0x917a6f36916098374ddC96168dB56aE5bB9A2CBc"
+      "address": "0x826FD8Cc9a2B7C194E796bACf8715aE88aF53D2F"
     },
     {
       "chain": "solana",
-      "address": "AVtbjLPMnaFHJsizmHCeqbWcyqioyscVStnxm4scXMPK"
+      "address": "8h7d4hCFBcvrB7EounAR3GGoN8NLGh3w2BT3sc3YBq2Z"
     }
   ]
 }
