@@ -12,11 +12,11 @@ Sometimes I make things with A.I.
 
 ### 🛠️ Tech Stack
 
-- **Languages:** TypeScript, JavaScript, C++
-- **Frameworks:** Next.js, React, Elysia.js
-- **AI/ML:** OpenAI, Anthropic Claude, ElizaOS
+- **Languages:** TypeScript, JavaScript, C++, Rust, SQL
+- **Frameworks:** Next.js, React, Elysia.js, Convex, Drizzle, Postgres, Tanstack, Anchor
+- **AI/ML:** OpenAI, Anthropic Claude, ElizaOS, AI SDK, Custom
 - **Blockchain:** Solana, Ethereum
-- **Tools:** Railway, Vercel, Docker
+- **Tools:** Railway, Vercel, Docker, AWS
 
 ### 📊 GitHub Stats
 
