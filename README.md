@@ -1,4 +1,4 @@
-# Hi there, I'm dEXploarer 👋
+# dEXploarer - One who Tinkers with AI
 
 ## 🤖 AI Engineer & Full-Stack Developer
 
