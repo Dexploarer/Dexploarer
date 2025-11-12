@@ -6,7 +6,7 @@ Sometimes I make things with A.I.
 
 ### 🔭 Current Projects
 
-- **[HyperscapeAI/hyperscape](https://github.com/HyperscapeAI/hyperscape)** - AI-powered game development tools
+- **[HyperscapeAI/hyperscape](https://github.com/HyperscapeAI/hyperscape)** - AI-powered game built with ElizaOS
 - **[Dexploarer/hyper-forge](https://github.com/Dexploarer/hyper-forge)** - AI-powered 3D asset generation platform
 - **[elizaOS/eliza](https://github.com/elizaOS/eliza)** - Building autonomous agents
 
