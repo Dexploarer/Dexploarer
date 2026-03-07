@@ -20,14 +20,14 @@ $ whoami
 > dEXploarer
 
 $ cat /etc/dexploarer
-  handle  : dEXploarer
-  status  : 💾 locked in
-  studio  : Blind Vibe
-  stack   : TypeScript • Go • AI Agents • Onchain Systems
-  vibe    : terminally online, building in the dark
-  orgs    : @Blind-Vibe @milady-ai @LunchTable-TCG @Ghostspeak @Prompt-or-Die-Labs
-  contribs: 3,920 contributions in the last year
-  repos   : 143 repositories • 39 stars earned
+handle  : dEXploarer
+status  : 💾 locked in
+studio  : Blind Vibe
+stack   : TypeScript • Go • AI Agents • Onchain Systems
+vibe    : terminally online, building in the dark
+orgs    : @Blind-Vibe @milady-ai @LunchTable-TCG @Ghostspeak @Prompt-or-Die-Labs
+contribs: 3,920 contributions in the last year
+repos   : 143 repositories • 39 stars earned
 ```
 
 ---
@@ -143,44 +143,42 @@ $ cat activity.log
 ```bash
 $ cat trophy_case
 ```
-
 - 💾 **3,920 contributions** in the last year — terminally locked in
-- - 🗂️ **143 repositories** — building everything, shipping most of it
-  - - ⭐ **39 stars earned** across original work
-    - - 🏗️ Founding contributor & architect at **[Blind Vibe](https://github.com/Blind-Vibe)**
-      - - 🤖 Active contributor in the **elizaOS / milady-ai** ecosystem
-        - - 🃏 Creator of **LunchTable TCG** — AI-native tabletop gaming platform
-          - - 👻 Contributing to **Ghostspeak** — AI agent identity + reputation on Solana
-            - - ⚙️ Built **dizzy-overlay** — native Go overlay powering Claude Code with live git context
-              - - 🔥 Built **CaScreener** — degen terminal for Solana alpha, UGI + AI agents
-                - - 📐 Shipped **prompt-or-die-tech-ui** — production-ready cyberpunk React component library
-                  - - 🌐 **GitHub Developer Program Member**
-                    - - 🔗 Spanning game engines · AI agents · onchain systems · desktop apps · DX tooling
-                     
-                      - ---
+- 🗂️ **143 repositories** — building everything, shipping most of it
+- ⭐ **39 stars earned** across original work
+- 🏗️ Founding contributor & architect at **[Blind Vibe](https://github.com/Blind-Vibe)**
+- 🤖 Active contributor in the **elizaOS / milady-ai** ecosystem
+- 🃏 Creator of **LunchTable TCG** — AI-native tabletop gaming platform
+- 👻 Contributing to **Ghostspeak** — AI agent identity + reputation on Solana
+- ⚙️ Built **dizzy-overlay** — native Go overlay powering Claude Code with live git context
+- 🔥 Built **CaScreener** — degen terminal for Solana alpha, UGI + AI agents
+- 📐 Shipped **prompt-or-die-tech-ui** — production-ready cyberpunk React component library
+- 🌐 **GitHub Developer Program Member**
+- 🔗 Spanning game engines · AI agents · onchain systems · desktop apps · DX tooling
+- ---
 
-                      ## 🌐 Orgs & Ecosystems
+## 🌐 Orgs & Ecosystems
 
-                      ```bash
-                      $ ls /etc/orgs
-                      ```
+```bash
+$ ls /etc/orgs
+```
 
-                      | Org | Role |
-                      |-----|------|
-                      | [Blind Vibe](https://github.com/Blind-Vibe) | Studio / Founder |
-                      | [milady-ai](https://github.com/milady-ai) | Contributor |
-                      | [LunchTable-TCG](https://github.com/LunchTable-TCG) | Founder |
-                      | [Ghostspeak](https://github.com/Ghostspeak) | Contributor |
-                      | [Prompt-or-Die-Labs](https://github.com/Prompt-or-Die-Labs) | Founder |
+| Org | Role |
+|-----|------|
+| [Blind Vibe](https://github.com/Blind-Vibe) | Studio / Founder |
+| [milady-ai](https://github.com/milady-ai) | Contributor |
+| [LunchTable-TCG](https://github.com/LunchTable-TCG) | Founder |
+| [Ghostspeak](https://github.com/Ghostspeak) | Contributor |
+| [Prompt-or-Die-Labs](https://github.com/Prompt-or-Die-Labs) | Founder |
 
-                      ---
+---
 
-                      <div align="center">
+<div align="center">
 
-                      ```
-                      "Sometimes I make things with A.I."
-                      ```
+```
+"Sometimes I make things with A.I."
+```
 
-                      ![Visitor Count](https://komarev.com/ghpvc/?username=Dexploarer&color=39ff14&style=flat-square&label=profile+views)
+![Visitor Count](https://komarev.com/ghpvc/?username=Dexploarer&color=39ff14&style=flat-square&label=profile+views)
 
-                      </div>
+</div>
