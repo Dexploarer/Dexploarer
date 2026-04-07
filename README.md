@@ -88,6 +88,73 @@ $ lsmod --tech
 
 ---
 
+## 🔍 Technical Q&A
+
+```bash
+$ cat /etc/dexploarer/technical-interview
+```
+
+### How do you debug bugs and profile performance?
+
+I write dedicated **benchmark harnesses** and bake **performance measurement into CI** so regressions are caught before they merge.
+
+- **Criterion benchmarks in Rust** — In [prompt-or-die](https://github.com/Dexploarer/prompt-or-die) I built a [`render_pipeline.rs`](https://github.com/Dexploarer/prompt-or-die/blob/main/crates/pod-render/benches/render_pipeline.rs) benchmark that stress-tests render-state extraction across 9,000 mixed entities (sprites, 3D meshes, hierarchies) using Criterion throughput measurements. The [CI pipeline](https://github.com/Dexploarer/prompt-or-die/blob/main/.github/workflows/ci.yml) runs 250-iteration benchmark suites across 3 rounds and uploads artifacts for tracking.
+- **PerformanceMonitor utility** — In [hyper-forge](https://github.com/Dexploarer/hyper-forge) I built a [`performance.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/utils/performance.ts) utility with `measureAsync()`, `measureSync()`, and a React hook `usePerformanceMeasure()` for component render timing — integrated with the Browser Performance API. The [CI pipeline](https://github.com/Dexploarer/hyper-forge/blob/main/.github/workflows/test.yml) includes a dedicated **Performance & Load Tests** job.
+- **Simulation benchmark engine** — In [hyperscape](https://github.com/HyperscapeAI/hyperscape) I built [`benchmark.ts`](https://github.com/HyperscapeAI/hyperscape/blob/main/packages/sim-engine/src/benchmark.ts) — 16 stress-test scenarios (MEV attacks, Sybil swarms, oracle lag) × 12 seeds = 192 simulation runs aggregated with P10/P50/P90 quantiles. Plus an [`attack-fuzz.ts`](https://github.com/HyperscapeAI/hyperscape/blob/main/packages/sim-engine/src/attack-fuzz.ts) fuzzer for robustness profiling.
+
+---
+
+### Tell us about a case where you had to heavily optimize code/features for weak hardware.
+
+**Prompt or Die** is a Rust game engine that compiles to both native and **WebAssembly** (`wasm32-unknown-unknown`) for browser targets — inherently resource-constrained.
+
+- **ECS architecture** — [`pod-physics`](https://github.com/Dexploarer/prompt-or-die/blob/main/crates/pod-physics/src/lib.rs) and [`pod-spatial`](https://github.com/Dexploarer/prompt-or-die/blob/main/crates/pod-spatial/src/lib.rs) use [hecs](https://crates.io/crates/hecs) for cache-friendly entity management. [bytemuck](https://crates.io/crates/bytemuck) enables zero-copy GPU buffer serialization. Rapier2D uses `simd-stable` for vectorized physics on low-end CPUs.
+- **Spatial acceleration** — `pod-spatial` implements an R-tree spatial index for O(log n) queries, a `UniformGrid` broad-phase hash for fast neighbor lookups, and `NavMesh` precomputed navigation — all designed to minimize per-frame allocation.
+
+In **[hyper-forge](https://github.com/Dexploarer/hyper-forge)**, the 3D retargeting pipeline runs in-browser:
+
+- **GC avoidance** — [`AnimationRetargeting.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/services/retargeting/AnimationRetargeting.ts) pre-allocates reusable `Quaternion` and `Vector3` instances to avoid garbage collection during animation loops.
+- **Bone optimization** — [`SimpleHandRiggingService.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/services/hand-rigging/SimpleHandRiggingService.ts) (81KB) removes orphaned bones to prevent memory leaks, recalculates inverse bind matrices, and applies a `BONE_SCALE_FIX` for geometry scaling.
+
+In **[hyperscape](https://github.com/HyperscapeAI/hyperscape)**, dedicated packages handle LOD and rendering optimization:
+
+- [`packages/impostors`](https://github.com/HyperscapeAI/hyperscape/tree/main/packages/impostors) — billboard impostor rendering for distant objects
+- [`packages/decimation`](https://github.com/HyperscapeAI/hyperscape/tree/main/packages/decimation) — automatic mesh decimation for level-of-detail generation
+- [`packages/physx-js-webidl`](https://github.com/HyperscapeAI/hyperscape/tree/main/packages/physx-js-webidl) — PhysX compiled to WebAssembly for browser-side physics
+
+---
+
+### Experience with linear algebra, vectors, quaternions, physics?
+
+Yes — extensively, across both Rust and TypeScript:
+
+**Rust (prompt-or-die):**
+- [`pod-physics/src/lib.rs`](https://github.com/Dexploarer/prompt-or-die/blob/main/crates/pod-physics/src/lib.rs) (24KB) — Full Rapier2D integration: `RigidBodySet`, `ColliderSet`, `NarrowPhase` collision detection, `CCDSolver` continuous collision, `QueryPipeline` for raycasts, deterministic 60Hz timestep.
+- [`pod-spatial/src/lib.rs`](https://github.com/Dexploarer/prompt-or-die/blob/main/crates/pod-spatial/src/lib.rs) (25KB) — R-tree spatial indexing, A\* `GridPathfinder`, `NavMesh` navigation, `UniformGrid` broad-phase hashing, 2D raycasting. Uses `glam` for Vec2/Vec3/Vec4 math.
+
+**TypeScript (hyper-forge) — Quaternion-heavy 3D retargeting:**
+- [`AnimationRetargeting.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/services/retargeting/AnimationRetargeting.ts) (14KB) — Quaternion `premultiply`/`multiply`/`invert` for skeletal animation, Mixamo→VRM retargeting with coordinate system transforms (VRM 0.0 vs 1.0).
+- [`VRMConverter.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/services/retargeting/VRMConverter.ts) (45KB) — Massive format conversion pipeline with Matrix4/Matrix3 bone transforms.
+- [`SkeletonRetargeter.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/services/retargeting/SkeletonRetargeter.ts) (13KB), [`WeightTransferSolver.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/services/retargeting/WeightTransferSolver.ts) (13KB), [`DistanceChildTargetingSolver.ts`](https://github.com/Dexploarer/hyper-forge/blob/main/apps/core/src/services/retargeting/DistanceChildTargetingSolver.ts) (7KB) — IK constraint solving and skinning weight calculations.
+
+**Physics engine (hyperscape):**
+- [`packages/physx-js-webidl`](https://github.com/HyperscapeAI/hyperscape/tree/main/packages/physx-js-webidl) — Full NVIDIA PhysX integration compiled to WebAssembly via WebIDL bindings, Dockerized build pipeline.
+
+---
+
+### How do you work with version control (Git, Perforce) and CI/CD?
+
+Every project I build ships with a multi-job **GitHub Actions** pipeline. Some examples:
+
+- **[prompt-or-die CI](https://github.com/Dexploarer/prompt-or-die/blob/main/.github/workflows/ci.yml)** — 4-job Rust pipeline: workspace (`cargo check` + `cargo test` + `cargo clippy`), WASM browser builds (`wasm32-unknown-unknown`), Playwright smoke tests, and a 250-iteration benchmark suite with artifact uploads.
+- **[hyper-forge CI](https://github.com/Dexploarer/hyper-forge/blob/main/.github/workflows/test.yml)** — 4 parallel jobs: Unit+Integration (PostgreSQL service, Codecov 80% threshold), E2E (Playwright across Chrome/Firefox/WebKit), Performance & Load Tests, and a Test Summary job that posts PR comments.
+- **[hyperscape CI](https://github.com/HyperscapeAI/hyperscape/blob/main/.github/workflows/ci.yml)** — Enterprise monorepo pipeline: lint → test (PostgreSQL, Tauri system deps, recursive submodules) → build (Turbo dependency orchestration) → Docker (staging/production images). **10+ workflows** covering [deploy-cloudflare](https://github.com/HyperscapeAI/hyperscape/blob/main/.github/workflows/deploy-cloudflare.yml), [deploy-railway](https://github.com/HyperscapeAI/hyperscape/blob/main/.github/workflows/deploy-railway.yml), [deploy-vast](https://github.com/HyperscapeAI/hyperscape/blob/main/.github/workflows/deploy-vast.yml), [security scanning](https://github.com/HyperscapeAI/hyperscape/blob/main/.github/workflows/security.yml), [integration testing](https://github.com/HyperscapeAI/hyperscape/blob/main/.github/workflows/integration.yml), and [package publishing](https://github.com/HyperscapeAI/hyperscape/blob/main/.github/workflows/publish-duel-oracle-packages.yml).
+- **[milady-ai](https://github.com/milady-ai)** — Contributed asset pipeline management (VRM/GLB), Git LFS troubleshooting, and deployment workflow setup across milady-ai/avatars and milady-ai/skills.
+
+I use Git exclusively (no Perforce), with branch-per-feature, conventional commits, PR templates, and concurrency controls (`cancel-in-progress: true`) to prevent duplicate CI runs.
+
+---
+
 ## 🏆 Highlights
 
 ```bash
