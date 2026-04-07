@@ -22,10 +22,10 @@ $ whoami
 $ cat /etc/dexploarer
 handle  : dEXploarer
 status  : 💾 locked in
-studio  : Blind Vibe
+studio  : Prompt or Die
 stack   : TypeScript • Go • Rust • AI Agents • Onchain Systems
 vibe    : terminally online, building in the dark
-orgs    : @Blind-Vibe @milady-ai @LunchTable-TCG @Ghostspeak @Prompt-or-Die-Labs
+orgs    : @milady-ai @LunchTable-TCG @Ghostspeak @Prompt-or-Die-Labs
 contribs: 3,920 contributions in the last year
 repos   : 143 repositories • 39 stars earned
 ```
